@@ -49,7 +49,8 @@ public class AuthConf {
           // potrebbe essere utile in un altro progetto
           // .requestMatchers("/[0-9]+").hasAuthority("ADMIN")
           
-          .and().formLogin().defaultSuccessUrl("/pizzas")
+          .and().formLogin()
+          // .and().formLogin().defaultSuccessUrl("/pizzas")
           .and().logout(logout -> logout.logoutSuccessUrl("/pizzas"));
 
     return http.build();

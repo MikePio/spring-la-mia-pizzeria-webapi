@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,6 +24,7 @@ public class Ingredient {
 
   // * RELAZIONE MANY-TO-MANY / N-N - STEP 2.2/2.2 - COLLEGAMENTO DELLE TABELLE in Pizza.java e poi in Ingredient.java
   @ManyToMany(mappedBy = "ingredients")
+  @JsonBackReference  // * spring-la-mia-pizzeria-webapi DAY 1 - STEP 4.2 - inserire @JsonBackReference sotto a @ManyToOne e a @ManyToMany delle altre classi/model (SpecialOffer e Ingredient) associati alla classe/model Pizza
   private List<Pizza> pizzas;
 
   @Length(min = 2, max = 128, message = "\nThe length must be between 2 and 128 characters" )

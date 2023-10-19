@@ -6,6 +6,8 @@ import java.util.List;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -47,10 +49,12 @@ public class Pizza {
   
   // * @OneToMany
   @OneToMany(mappedBy = "pizza") // * mappedBy fa l'inverso di ciò che è stato fatto nel @ManyToOne per quanto riguarda i collegamenti/le relazioni tra le tabelle
+  @JsonManagedReference  // * spring-la-mia-pizzeria-webapi DAY 1 - STEP 4.1 - inserire @JsonManagedReference sotto a @OneToMany e a @ManyToMany della classe/model Pizza
 	private List<SpecialOffer> specialOffers;
 
   // * RELAZIONE MANY-TO-MANY / N-N - STEP 2.1/2.2 - COLLEGAMENTO DELLE TABELLE in Pizza.java e poi in Ingredient.java
   @ManyToMany
+  @JsonManagedReference  // * spring-la-mia-pizzeria-webapi DAY 1 - STEP 4.1 - inserire @JsonManagedReference sotto a @OneToMany e a @ManyToMany della classe/model Pizza
   private List<Ingredient> ingredients;
 
   // costruttore

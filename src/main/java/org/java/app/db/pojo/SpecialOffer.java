@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 
 import org.aspectj.lang.annotation.After;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -46,6 +49,7 @@ public class SpecialOffer {
   // * @ManyToOne
   @ManyToOne // * per ogni offerta speciale esiste una sola pizza
   @JoinColumn(nullable = false) // * un'offerta speciale non può esistere senza una pizza
+  @JsonBackReference  // * spring-la-mia-pizzeria-webapi DAY 1 - STEP 4.2 - inserire @JsonBackReference sotto a @ManyToOne e a @ManyToMany delle altre classi/model (SpecialOffer e Ingredient) associati alla classe/model Pizza
   private Pizza pizza;
 
   public SpecialOffer() {}
