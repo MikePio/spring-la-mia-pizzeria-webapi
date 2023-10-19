@@ -98,7 +98,9 @@ public class PizzaController {
   @GetMapping("/pizzas/{id}")
   public String getShow(@PathVariable int id, Model model) {
 
-    Pizza pizza = pizzaService.findById(id);
+    // Pizza pizza = pizzaService.findById(id);
+    // modificato metodo findById per la ricerca per id utlizzata nella chiamata API
+    Pizza pizza = pizzaService.findById(id).get();
     model.addAttribute("pizza", pizza);
 
     return "pizza-show";
@@ -157,7 +159,9 @@ public class PizzaController {
   @GetMapping("/pizzas/update/{id}")
   public String getPizzaUpdate(@PathVariable int id, Model model){
 
-    Pizza pizza = pizzaService.findById(id);
+    // Pizza pizza = pizzaService.findById(id);
+    // modificato metodo findById per la ricerca per id utlizzata nella chiamata API
+    Pizza pizza = pizzaService.findById(id).get();
     List<Ingredient> ingredients = ingredientService.findAll();
 
 		model.addAttribute("pizza", pizza);
@@ -201,7 +205,9 @@ public class PizzaController {
 	@PostMapping("/pizzas/delete/{id}")
 	public String deletePizza(@PathVariable int id) {
 		
-		Pizza pizza = pizzaService.findById(id);
+		// Pizza pizza = pizzaService.findById(id);
+    // modificato metodo findById per la ricerca per id utlizzata nella chiamata API
+		Pizza pizza = pizzaService.findById(id).get();
 
     // * Step 3 - eliminazione degli ingredienti associati ad una pizza - dichiaro la lista di offerte speciali associate a una pizza ottenuta con il metodo findByPizza in modo da poterla ciclare per eliminare le offerte speciali associate alla pizza specificata
 		List<SpecialOffer> specialOffers = specialOfferService.findByPizza(pizza);
@@ -221,7 +227,9 @@ public class PizzaController {
   @GetMapping("/pizzas/special-offer/{pizza_id}")
   public String specialOffer(@PathVariable("pizza_id") int id, Model model){
     
-    Pizza pizza = pizzaService.findById(id);
+    // Pizza pizza = pizzaService.findById(id);
+    // modificato metodo findById per la ricerca per id utlizzata nella chiamata API
+    Pizza pizza = pizzaService.findById(id).get();
 		SpecialOffer specialOffer = new SpecialOffer();
 
 		model.addAttribute("pizza", pizza);
@@ -233,7 +241,9 @@ public class PizzaController {
   @PostMapping("/pizzas/special-offer/{pizza_id}")
   public String storeSpecialOffer(@Valid @ModelAttribute SpecialOffer specialOffer, BindingResult bindingResult, @PathVariable("pizza_id") int id, Model model){
 
-    Pizza pizza = pizzaService.findById(id);
+    // Pizza pizza = pizzaService.findById(id);
+    // modificato metodo findById per la ricerca per id utlizzata nella chiamata API
+    Pizza pizza = pizzaService.findById(id).get();
 
     // * STEP 2 - validazione della end date che deve essere dopo la start date
     if(specialOffer.isEndDateAfterStartDate() == 2){

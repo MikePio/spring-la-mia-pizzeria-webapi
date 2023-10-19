@@ -1,6 +1,7 @@
 package org.java.app.db.serv;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.java.app.db.pojo.Pizza;
 import org.java.app.db.repo.PizzaRepo;
@@ -23,8 +24,12 @@ public class PizzaService {
 		return pizzaRepo.findAll();
 	}
 	
-	public Pizza findById(int id) {
-		return pizzaRepo.findById(id).get();
+	// public Pizza findById(int id) {
+	// 	return pizzaRepo.findById(id).get();
+	// }
+	// modificato metodo findById per la ricerca per id utlizzata nella chiamata API
+	public Optional<Pizza> findById(int id) {
+		return pizzaRepo.findById(id);
 	}
 	
   // findByName perché il campo salvato nel db è name (se invece fosse stato title allora findByTitle)
