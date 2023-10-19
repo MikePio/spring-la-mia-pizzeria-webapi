@@ -14,8 +14,7 @@ Questo esercizio è la continuazione della repo `spring-la-mia-pizzeria-security
 
 ## Todo
 ### Day 1
-Ciao ragazzi,
-vogliamo dare accesso alla nostra applicazione anche all’esterno!
+Diamo accesso alla nostra applicazione anche all’esterno.
 
 Implementiamo quindi i metodi **CRUD** tramite `RestController`.
 
@@ -26,7 +25,7 @@ Diamo la possibilità di:
 - **modificare una pizza esistente**
 - **cancellare una pizza**
 
-Queste operazioni devono poter essere eseguite tramite `PostMan`, non preoccupiamoci quindi della parte di **front-end** per ora.
+Queste operazioni devono poter essere eseguite tramite `PostMan` o `Thunder Client`(estensione di Visual Studio Code), non preoccupiamoci quindi della parte di **front-end** per ora.
 
 # `spring-la-mia-pizzeria-security`
 

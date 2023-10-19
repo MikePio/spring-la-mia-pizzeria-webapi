@@ -27,6 +27,8 @@ public class AuthConf {
           // * .permitAll() fa accedere tutti: USER, ADMIN o anche un utente che non ha fatto il login
           .requestMatchers("/login").permitAll()
           .requestMatchers("/credits").permitAll()
+          // * spring-la-mia-pizzeria-webapi DAY 1 - STEP 1 - creare la rotta API nel file auth (AuthConf)
+          .requestMatchers("/api/**").permitAll()
           // * protegge le rotte e ti fa accedere solo se sei USER o ADMIN
           .requestMatchers("/").hasAnyAuthority("USER", "ADMIN")
           .requestMatchers("/pizzas").hasAnyAuthority("USER", "ADMIN")
