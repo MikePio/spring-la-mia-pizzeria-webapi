@@ -3,6 +3,7 @@ package org.java.app.db.api.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.java.app.db.api.dto.PizzaDTO;
 import org.java.app.db.pojo.Pizza;
 import org.java.app.db.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,33 @@ public class PizzaApiController {
     return new ResponseEntity<>(optPizza.get(), HttpStatus.OK);
   }
   
-
+  // * creazione di una nuova pizza in post
+  // * su thunder client o postman inserendo nel BODY dell'url http://localhost:8080/api/v1.0/pizzeria-italia il codice qui in basso e inviandolo in POST dovrebbe creare un nuovo oggetto(/pizza)
+  // {
+  //   "name": "test pizza creata",
+  //   "description": "Pomodoro, mozzarella e salame piccanta",
+  //   "photo": "diavola.jpg",
+  //   "price": 10.0
+  // }
+  // * e questo codice dovrebbe generare come risultato 
+  // {
+  //   "id": 4,
+  //   "name": "test pizza creata",
+  //   "description": "Pomodoro, mozzarella e salame piccanta",
+  //   "photo": "diavola.jpg",
+  //   "price": 10.0,
+  //   "specialOffers": null,
+  //   "ingredients": null,
+  //   "formattedPrice": "10,00"
+  // }
+	@PostMapping
+	public ResponseEntity<Pizza> createPizza(@RequestBody PizzaDTO pizzaDto) {
+		
+		Pizza pizza = new Pizza(pizzaDto);
+		pizza = pizzaService.save(pizza);
+		
+		return new ResponseEntity<>(pizza, HttpStatus.OK);
+	}
 
 
 

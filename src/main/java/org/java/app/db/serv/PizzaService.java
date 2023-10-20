@@ -16,8 +16,12 @@ public class PizzaService {
 	@Autowired
 	private PizzaRepo pizzaRepo;
 	
-	public void save(Pizza pizza) {
-		pizzaRepo.save(pizza);
+	// public void save(Pizza pizza) {
+	// 	pizzaRepo.save(pizza);
+	// }
+	// metodo save modificato in modo da far ritornare l'oggetto pizza
+	public Pizza save(Pizza pizza) {
+		return pizzaRepo.save(pizza);
 	}
 	
 	public List<Pizza> findAll() {

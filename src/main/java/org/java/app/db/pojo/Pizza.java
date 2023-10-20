@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
+import org.java.app.db.api.dto.PizzaDTO;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -70,6 +71,14 @@ public class Pizza {
     // * RELAZIONE MANY-TO-MANY / N-N - STEP 4.4/4.5 - COLLEGARE GLI ID DELLE PIZZE CON GLI ID DEGLI INGREDIENTI NELLA TABELLA db_pizzeria_relationships DEL DB --> aggiungere il setIngredients(Arrays.asList(ingredients)); al costruttore Pizza
     setIngredients(Arrays.asList(ingredients));
 	}
+
+  public Pizza(PizzaDTO PizzaDTO){
+
+    setName(PizzaDTO.getName());
+    setDescription(PizzaDTO.getDescription());
+    setPhoto(PizzaDTO.getPhoto());
+    setPrice(PizzaDTO.getPrice());
+  }
 
   public int getId() {
     return id;
