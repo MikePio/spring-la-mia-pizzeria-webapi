@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,14 +65,15 @@ public class PizzaApiController {
   }
   
   // * creazione di una nuova pizza in post
-  // * su thunder client o postman inserendo nel BODY dell'url http://localhost:8080/api/v1.0/pizzeria-italia il codice qui in basso e inviandolo in POST dovrebbe creare un nuovo oggetto(/pizza)
+  // * su thunder client o postman inserendo l'url http://localhost:8080/api/v1.0/pizzeria-italia, scrivendo nel BODY il codice qui in basso e inviandolo in POST dovrebbe creare un nuovo oggetto(/pizza)
+  // * es. codice da inserire nel Body di thunder client o postman
   // {
   //   "name": "test pizza creata",
   //   "description": "Pomodoro, mozzarella e salame piccanta",
   //   "photo": "diavola.jpg",
   //   "price": 10.0
   // }
-  // * e questo codice dovrebbe generare come risultato 
+  // * es. risultato generato dal codice scritto qui in alto
   // {
   //   "id": 4,
   //   "name": "test pizza creata",
@@ -91,6 +93,68 @@ public class PizzaApiController {
 		return new ResponseEntity<>(pizza, HttpStatus.OK);
 	}
 
-
+  // * modifica di una pizza esistente con PUT
+  // * su thunder client o postman inserendo l'url http://localhost:8080/api/v1.0/pizzeria-italia/ + l'id della pizza da modificare, scrivendo nel BODY il codice qui in basso e inviandolo in PUT dovrebbe creare un nuovo oggetto(/pizza)
+  // * (es. url per la modifica della pizza con id 2:  http://localhost:8080/api/v1.0/pizzeria-italia/2)
+  // * es. codice da inserire nel Body di thunder client o postman
+  // {
+  //   "name": "test pizza creata",
+  //   "description": "Pomodoro, mozzarella e salame piccanta",
+  //   "photo": "diavola.jpg",
+  //   "price": 10.0
+  // }
+  // * es. risultato generato dal codice scritto qui in alto
+  // {
+  //   "id": 2,
+  //   "name": "test pizza creata",
+  //   "description": "Pomodoro, mozzarella e salame piccanta",
+  //   "photo": "cotto.jpg",
+  //   "price": 10.0,
+  //   "specialOffers": [
+  //     {
+  //       "id": 2,
+  //       "title": "Offerta Speciale 2",
+  //       "startDate": "2023-10-20",
+  //       "endDate": "2024-03-27",
+  //       "htmlStartDate": "2023-10-20",
+  //       "htmlEndDate": "2024-03-27",
+  //       "formattedStartDate": "20/10/2023",
+  //       "formattedEndDate": "27/03/2024"
+  //     }
+  //   ],
+  //   "ingredients": [
+  //     {
+  //       "id": 1,
+  //       "name": "pomodoro",
+  //       "nameWithInitialCapital": "Pomodoro"
+  //     },
+  //     {
+  //       "id": 2,
+  //       "name": "mozzarella",
+  //       "nameWithInitialCapital": "Mozzarella"
+  //     },
+  //     {
+  //       "id": 3,
+  //       "name": "prosciutto cotto",
+  //       "nameWithInitialCapital": "Prosciutto cotto"
+  //     }
+  //   ],
+  //   "formattedPrice": "10,00"
+  // }
+  @PutMapping("{id}")
+	public ResponseEntity<Pizza> updatePizza(@PathVariable int id, @RequestBody PizzaDTO pizzaDto) {
+		
+		Optional<Pizza> optPizza = pizzaService.findById(id);
+		
+		if (optPizza.isEmpty())
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		
+		Pizza pizza = optPizza.get();
+		pizza.fillFromDto(pizzaDto);
+		
+		pizza = pizzaService.save(pizza);
+		
+		return new ResponseEntity<>(pizza, HttpStatus.OK);
+	}
 
 }

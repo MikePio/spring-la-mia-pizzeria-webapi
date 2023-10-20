@@ -149,6 +149,13 @@ public class Pizza {
 		getIngredients().remove(ingredient);
 	}
 
+  public void fillFromDto(PizzaDTO pizzaDto) {
+		
+		setName(pizzaDto.getName());
+		setDescription(pizzaDto.getDescription());
+		setPrice(pizzaDto.getPrice());
+	}
+  
   @Override
   public String toString() {
 		return "Id: " + getId() + "\n" + "Name: " + getName() + "\n" + "Description: " + getDescription() + "\n" + "Image path: " + getPhoto() + "\n" + "Price: " + getPrice() + " ----> Formatted Price: " + getFormattedPrice() + "\n";
