@@ -12,8 +12,9 @@ Questo esercizio è la continuazione della repo `spring-la-mia-pizzeria-security
 > 
 > Si consiglia quindi di eliminare la cartella nascosta `.git` e di procedere nuovamente con la fase di `init` su **nuova repo**.
 
+# Day 1
+### 16/10/23
 ## Todo
-### Day 1
 Diamo accesso alla nostra applicazione anche all’esterno.
 
 Implementiamo quindi i metodi **CRUD** tramite `RestController`.
@@ -26,6 +27,15 @@ Diamo la possibilità di:
 - **cancellare una pizza**
 
 Queste operazioni devono poter essere eseguite tramite `PostMan` o `Thunder Client`(estensione di Visual Studio Code), non preoccupiamoci quindi della parte di **front-end** per ora.
+
+# Day 2
+### 17/10/23
+## Todo
+Abbiamo implementato le `Api REST` e le possiamo interrogare con `PostMan` o `Thunder Client`(estensione di Visual Studio Code).
+
+Creiamo ora un semplice progetto *frontend* che le richiami e tramite `VueJS` mostri in pagina i dati.
+
+Vogliamo una pagina per la **lista delle pizze** (**filtrabili per titolo**), una per la **creazione di una nuova pizza**, **una per la modifica di una pizza esistente** e il pulsante per la **cancellazione di un elemento**.
 
 # `spring-la-mia-pizzeria-security`
 
