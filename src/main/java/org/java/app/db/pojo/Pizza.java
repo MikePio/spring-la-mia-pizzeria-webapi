@@ -153,9 +153,10 @@ public class Pizza {
 		
 		setName(pizzaDto.getName());
 		setDescription(pizzaDto.getDescription());
+		setPhoto(pizzaDto.getPhoto());
 		setPrice(pizzaDto.getPrice());
 	}
-  
+
   @Override
   public String toString() {
 		return "Id: " + getId() + "\n" + "Name: " + getName() + "\n" + "Description: " + getDescription() + "\n" + "Image path: " + getPhoto() + "\n" + "Price: " + getPrice() + " ----> Formatted Price: " + getFormattedPrice() + "\n";
