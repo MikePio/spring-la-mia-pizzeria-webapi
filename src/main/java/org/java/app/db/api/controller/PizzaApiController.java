@@ -5,11 +5,14 @@ import java.util.Optional;
 
 import org.java.app.db.api.dto.PizzaDTO;
 import org.java.app.db.pojo.Pizza;
+import org.java.app.db.pojo.SpecialOffer;
 import org.java.app.db.serv.PizzaService;
+import org.java.app.db.serv.SpecialOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +30,9 @@ public class PizzaApiController {
 
   @Autowired
   private PizzaService pizzaService;
+
+  @Autowired
+  private SpecialOfferService specialOfferService;
 
   // * spring-la-mia-pizzeria-webapi DAY 1 - STEP 3 - compilare il controller e stamapre hello world testare le API con `PostMan` o `Thunder Client` (estensione di Visual Studio Code) es. http://localhost:8080/api/pizza-test in GET
   // * spring-la-mia-pizzeria-webapi DAY 1 - STEP 4.3 - compilare il controller e stampare il json tramite le API con `PostMan` o `Thunder Client` (estensione di Visual Studio Code) es. http://localhost:8080/api/pizza-test in GET
@@ -94,7 +100,7 @@ public class PizzaApiController {
 	}
 
   // * modifica di una pizza esistente con PUT
-  // * su thunder client o postman inserendo l'url http://localhost:8080/api/v1.0/pizzeria-italia/ + l'id della pizza da modificare, scrivendo nel BODY il codice qui in basso e inviandolo in PUT dovrebbe creare un nuovo oggetto(/pizza)
+  // * su thunder client o postman inserendo l'url http://localhost:8080/api/v1.0/pizzeria-italia/ + l'id della pizza da modificare, scrivendo nel BODY il codice qui in basso e inviandolo in PUT dovrebbe modificare l'oggetto/la pizza selezionato/a
   // * (es. url per la modifica della pizza con id 2:  http://localhost:8080/api/v1.0/pizzeria-italia/2)
   // * es. codice da inserire nel Body di thunder client o postman
   // {
@@ -155,6 +161,33 @@ public class PizzaApiController {
 		pizza = pizzaService.save(pizza);
 		
 		return new ResponseEntity<>(pizza, HttpStatus.OK);
+	}
+
+  // * cancellazione di una pizza esistente 
+  // * su thunder client o postman inserendo l'url http://localhost:8080/api/v1.0/pizzeria-italia/ + l'id della pizza da ELIMINARE e inviandolo in DELETE dovrebbe ELIMINARE l'oggetto/la pizza selezionato/a
+  // * (es. url per l'eliminazione della pizza con id 2:  http://localhost:8080/api/v1.0/pizzeria-italia/2)
+  @DeleteMapping("{id}")
+	public ResponseEntity<Boolean> deletePizza(@PathVariable int id) {
+		
+		Optional<Pizza> optPizza = pizzaService.findById(id);
+		
+		if (optPizza.isEmpty()) {
+      return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+    }
+
+		Pizza pizza = optPizza.get();
+
+    // eliminazione degli ingredienti associati ad una pizza - dichiaro la lista di offerte speciali associate a una pizza ottenuta con il metodo findByPizza in modo da poterla ciclare per eliminare le offerte speciali associate alla pizza specificata
+		List<SpecialOffer> specialOffers = specialOfferService.findByPizza(pizza);
+    // eliminazione degli ingredienti associati ad una pizza - ciclo la lista per ottenere ogni offerta speciale associata alla pizza (perché possono esserci più offerte speciali associate ad una pizza e non una sola)
+    for (SpecialOffer specialOffer : specialOffers) {
+      // eliminazione degli ingredienti associati ad una pizza - elimina nella tabella special_offer gli ingredienti associati/collegati alla pizza
+      specialOfferService.delete(specialOffer);
+    }
+		
+		pizzaService.deletePizza(pizza);
+		
+		return new ResponseEntity<>(true, HttpStatus.OK);
 	}
 
 }
