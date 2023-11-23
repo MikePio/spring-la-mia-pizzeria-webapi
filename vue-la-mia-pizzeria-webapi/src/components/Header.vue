@@ -1,11 +1,13 @@
 <script>
+import { store } from '../data/store';
+
 export default {
   name: 'Header',
 
   data(){
     return{
-      message: ''
-
+      store,
+      message: '',
 
     }
   },
@@ -21,10 +23,10 @@ export default {
       // const minutes = 29;
       // const minutes = 30;
 
-      console.log(now);
-      console.log(dayOfWeek);
-      console.log(hours);
-      console.log(minutes);
+      // console.log(now);
+      // console.log(dayOfWeek);
+      // console.log(hours);
+      // console.log(minutes);
 
       if ( //* "Pizzeria aperta fino alle 23:30" dal martedì alla domenica dalle ore 19:30 alle ore 23:29
         // ((dayOfWeek != 1) && (hours >= 0 && hours <= 18)) ||
@@ -66,7 +68,7 @@ export default {
   <nav class="px-2 px-sm-5 d-flex justify-content-between" style="background-color: rgba(0, 0, 0, 0.2); height: 60px; max-height: 60px;">
     <!-- //* compare la sidebar da 576px in giù  -->
     <div class="side-toggle-btn my-auto me-auto">
-      <button class="btn-dark-c" @click.prevent="toggleSidebar()"><i class="fa fa-bars"></i></button>
+      <button class="btn-dark-c" @click.prevent="store.toggleSidebar()"><i class="fa fa-bars"></i></button>
     </div>
 
     <!-- //* compaiono i link sopra i 576px  -->
@@ -75,12 +77,12 @@ export default {
         <router-link :to="{name: 'home'}">Home</router-link>
       </li>
       <li>
-        <!-- <router-link :to="{name: 'new-pizza'}">Add a New Pizza</router-link> -->
-        <a href="#">Add a New Pizza</a>
+        <router-link :to="{name: 'create'}">Add a New Pizza</router-link>
+        <!-- <a href="#">Add a New Pizza</a> -->
       </li>
       <li>
-        <!-- <router-link :to="{name: 'contacts'}">Contacts</router-link> -->
-        <a href="#">Contacts</a>
+        <router-link :to="{name: 'contacts'}">Contacts</router-link>
+        <!-- <a href="#">Contacts</a> -->
       </li>
     </ul>
     <div class="d-flex justify-content-between align-items-center text-white">
