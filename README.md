@@ -157,7 +157,7 @@ Ricordiamoci che l’utente potrebbe sbagliare inserendo dei dati **non consiste
 - il campi di **testo non superino una certa lunghezza**
 - il **prezzo abbia un valore valido** (prezzo maggiore di zero)
 
-## Day 4: update + delete
+## `Day 4: update + delete`
 ### 10/10/2023
 Completiamo le pagine di gestione delle nostre pizze.
 

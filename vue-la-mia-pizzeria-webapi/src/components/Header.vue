@@ -4,15 +4,58 @@ export default {
 
   data(){
     return{
-      today: '',
+      message: ''
+
 
     }
   },
+  methods: {
+    setMessage() {
+      const now = new Date();
+      const dayOfWeek = now.getDay();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      // const dayOfWeek = 2;
+      // const hours = 19;
+      // const hours = 23;
+      // const minutes = 29;
+      // const minutes = 30;
+
+      console.log(now);
+      console.log(dayOfWeek);
+      console.log(hours);
+      console.log(minutes);
+
+      if ( //* "Pizzeria aperta fino alle 23:30" dal martedì alla domenica dalle ore 19:30 alle ore 23:29
+        // ((dayOfWeek != 1) && (hours >= 0 && hours <= 18)) ||
+        // ((dayOfWeek != 1) && ((hours == 19 && minutes >= 30) || (hours == 23 && minutes <= 29))) 
+        // oppure
+        ((dayOfWeek >= 2 || dayOfWeek <= 6 || dayOfWeek === 0) && (hours >= 20 && hours <= 22)) ||
+        ((dayOfWeek >= 2 || dayOfWeek <= 6 || dayOfWeek === 0) && ((hours == 19 && minutes >= 30) || (hours == 23 && minutes <= 29))) 
+      ) {
+        this.message = `Pizzeria aperta fino alle 23:30`;
+      } else if ( //* "La pizzeria riapre alle 19:30" dal martedì alla domenica, dalle ore 00:00 alle ore 19:29 e dalle 23:31 a 23:59
+        // ((dayOfWeek != 1) && (hours >= 0 && hours <= 18)) ||
+        // ((dayOfWeek != 1) && (((hours == 19 && minutes <= 29) && (dayOfWeek != 1 && dayOfWeek <= 1)) || ((hours == 23 && minutes >= 30) && (dayOfWeek != 1 && dayOfWeek >= 2 ) ))) 
+        // oppure
+        ((dayOfWeek >= 2 || dayOfWeek <= 6 || dayOfWeek === 0) && (hours >= 0 && hours <= 18)) ||
+        ((dayOfWeek >= 2 || dayOfWeek <= 6 || dayOfWeek === 0) && (((hours == 19 && minutes <= 29) && (dayOfWeek != 1 && dayOfWeek <= 1)) || ((hours == 23 && minutes >= 30) && (dayOfWeek != 1 && dayOfWeek >= 2 ) ))) 
+      ) {
+        this.message = "La pizzeria riapre alle 19:30";
+        //! in realtà la soluzione migliore sarebbe impostare per prima la condizione per questo messaggio (ho fatto questa soluzione alternativa solo per esercitarmi con la logica)
+      } else { //* "La pizzeria riapre martedì alle 19:30" dalle 23:30 della domenica fino a 19:29 del martedì
+        this.message = "La pizzeria riapre martedì alle 19:30";
+        // this.message = "Error";
+      }
+    }
+  },
   mounted() {
-    const now = new Date();
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    this.today = now.toLocaleDateString('it-IT', options); 
-  }
+    this.setMessage();
+    // aggiorna il messaggio ogni minuto
+    setInterval(() => {
+      this.setMessage();
+    }, 60000);
+  },
 
 }
 </script>
@@ -41,7 +84,7 @@ export default {
       </li>
     </ul>
     <div class="d-flex justify-content-between align-items-center text-white">
-      <div>{{ today }}</div>
+      <div>{{ message }}</div>
     </div>
   </nav>
 
@@ -55,7 +98,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-// @use '../scss/main.scss' as *;
+@use '../scss/main.scss' as *;
 
 header{
     nav{
