@@ -74,11 +74,11 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 		
 		System.out.println("\n\nDati inseriti nella tabella del database\n\n");
 	
-		// oggetti SpecialOffer da inserire nel db
-		SpecialOffer specialOffer1 = new SpecialOffer(0, "Offerta Speciale 1", LocalDate.now(), LocalDate.parse("2023-10-23"), margherita);
-		SpecialOffer specialOffer2 = new SpecialOffer(0, "Offerta Speciale 2", LocalDate.now(), LocalDate.parse("2024-03-27"), cotto);
-		SpecialOffer specialOffer3 = new SpecialOffer(0, "Offerta Speciale 3", LocalDate.now(), LocalDate.parse("2024-08-15"), diavola);
-		SpecialOffer specialOffer4 = new SpecialOffer(0, "Offerta Speciale 4", LocalDate.now(), LocalDate.parse("2023-10-26"), margherita);
+		// oggetti SpecialOffer da inserire nel db //! TODO : SE C'è UN ERRORE BISOGNA AGGIORNARE LE DATE CON DATE FUTURE E NON INSERIRE DATE DEL PASSATO
+		SpecialOffer specialOffer1 = new SpecialOffer(0, "Offerta Speciale 1", LocalDate.now(), LocalDate.parse("2030-10-23"), margherita);
+		SpecialOffer specialOffer2 = new SpecialOffer(0, "Offerta Speciale 2", LocalDate.now(), LocalDate.parse("2030-03-27"), cotto);
+		SpecialOffer specialOffer3 = new SpecialOffer(0, "Offerta Speciale 3", LocalDate.now(), LocalDate.parse("2030-08-15"), diavola);
+		SpecialOffer specialOffer4 = new SpecialOffer(0, "Offerta Speciale 4", LocalDate.now(), LocalDate.parse("2030-10-26"), margherita);
 
 		specialOfferService.save(specialOffer1);
 		specialOfferService.save(specialOffer2);

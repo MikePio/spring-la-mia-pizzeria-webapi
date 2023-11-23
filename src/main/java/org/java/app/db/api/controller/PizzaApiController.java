@@ -75,7 +75,7 @@ public class PizzaApiController {
   // * es. codice da inserire nel Body di thunder client o postman
   // {
   //   "name": "test pizza creata",
-  //   "description": "Pomodoro, mozzarella e salame piccanta",
+  //   "description": "Pomodoro, mozzarella e salame piccante",
   //   "photo": "diavola.jpg",
   //   "price": 10.0
   // }
@@ -83,7 +83,7 @@ public class PizzaApiController {
   // {
   //   "id": 4,
   //   "name": "test pizza creata",
-  //   "description": "Pomodoro, mozzarella e salame piccanta",
+  //   "description": "Pomodoro, mozzarella e salame piccante",
   //   "photo": "diavola.jpg",
   //   "price": 10.0,
   //   "specialOffers": null,
@@ -105,7 +105,7 @@ public class PizzaApiController {
   // * es. codice da inserire nel Body di thunder client o postman
   // {
   //   "name": "test pizza creata",
-  //   "description": "Pomodoro, mozzarella e salame piccanta",
+  //   "description": "Pomodoro, mozzarella e salame piccante",
   //   "photo": "diavola.jpg",
   //   "price": 10.0
   // }
@@ -113,7 +113,7 @@ public class PizzaApiController {
   // {
   //   "id": 2,
   //   "name": "test pizza creata",
-  //   "description": "Pomodoro, mozzarella e salame piccanta",
+  //   "description": "Pomodoro, mozzarella e salame piccante",
   //   "photo": "cotto.jpg",
   //   "price": 10.0,
   //   "specialOffers": [

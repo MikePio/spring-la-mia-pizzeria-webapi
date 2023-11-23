@@ -10,6 +10,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 
+//* USERNAME ACCOUNT DI LOGIN 
+//! admin1
+//* PASSWORD ACCOUNT DI LOGIN
+//! 123
+
 // * STEP 6.1 - AUTHENTICATION - Creare il file AuthConf in db.auth.conf e compilarlo con filterChain, userDetailsService, passwordEncoder, authenticationProvider
 @Configuration
 public class AuthConf {
