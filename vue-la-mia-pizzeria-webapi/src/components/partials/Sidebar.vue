@@ -79,7 +79,8 @@ export default {
 
 .btn-dark-c{
   // background-color: #212529 !important;
-  background-color: #1A1E21 !important;
+  // background-color: #1A1E21 !important;
+  background-color: #ff001e !important;
   display: inline-block;
   padding: 0.5rem 1rem;
   font-size: 1rem;
@@ -96,7 +97,8 @@ export default {
 
 .nav-item{
   .active{
-    background-color: #212529 !important;
+    background-color: #ff001e !important;
+    // background-color: #212529 !important;
     // background-color: #1A1E21 !important;
     color: #fff !important;
   }

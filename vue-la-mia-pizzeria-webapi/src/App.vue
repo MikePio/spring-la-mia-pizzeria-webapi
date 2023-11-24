@@ -51,6 +51,9 @@ body{
   // todo da eliminare provvisorio
   // background-color: #4338CA;  
   // overflow-x: hidden;
+  .bg-dark{
+    background-color: rgba(255,  0, 30, 1) !important;
+  }
 }
 
 .overflow-y-hidden{

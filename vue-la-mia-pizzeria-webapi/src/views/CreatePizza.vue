@@ -11,7 +11,7 @@ export default {
             price: '',
             photo: '',
             description: '',
-
+            // sending: false
         }
     },
 
@@ -66,7 +66,7 @@ export default {
                     <!-- <textarea :class="{ 'is-invalid' : errors.description }" v-model.trim="description" type="text" name="description" class="form-control" placeholder="Description" cols="10" rows="10"></textarea> -->
                     <!-- <p v-for="(error,index) in errors.description" :key="index" class="text-danger">{{ error }}</p> -->
                 </div>
-                <button type="submit" class="btn btn-primary" :disabled="sending">{{ sending ? 'Loading...' : 'Add' }}</button>
+                <button type="submit" class="btn btn-danger-c" :btn-danger="sending" :disabled="sending">{{ sending ? 'Loading...' : 'Add' }}</button>
             </form>
         </div>
 
@@ -75,6 +75,9 @@ export default {
 
 
 
-<style>
-
+<style scoped>
+    .btn-danger-c{
+        background-color: #ff001e !important;
+        color: white;
+    }
 </style>

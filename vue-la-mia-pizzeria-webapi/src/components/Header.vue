@@ -63,7 +63,7 @@ export default {
 </script>
 
 <template>
-<header class="bg-dark" style="max-height: 165px;">
+<header class="" style="max-height: 165px; background-color: #ff001e !important;">
   
   <nav class="px-2 px-sm-5 d-flex justify-content-between" style="background-color: rgba(0, 0, 0, 0.2); height: 60px; max-height: 60px;">
     <!-- //* compare la sidebar da 576px in giù  -->
@@ -135,7 +135,8 @@ header{
 
 .btn-dark-c{
   // background-color: #212529 !important;
-  background-color: #1A1E21 !important;
+  // background-color: #1A1E21 !important;
+  background-color: #CC0018 !important;
   display: inline-block;
   padding: 0.5rem 1rem;
   font-size: 1rem;
