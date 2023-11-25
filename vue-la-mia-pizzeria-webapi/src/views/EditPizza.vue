@@ -11,8 +11,8 @@ export default {
             price: '',
             photo: '',
             description: '',
-            // sending: false
-
+            sending: false,
+            success: false
 
         }
     },
@@ -24,9 +24,13 @@ export default {
 
     methods:{
 
+
         
 
     },
+    mounted() { 
+
+    }
 }
 </script>
 

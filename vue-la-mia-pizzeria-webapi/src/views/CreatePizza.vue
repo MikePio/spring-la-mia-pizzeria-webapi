@@ -11,7 +11,9 @@ export default {
             price: '',
             photo: '',
             description: '',
-            // sending: false
+            sending: false,
+            success: false
+            
         }
     },
 

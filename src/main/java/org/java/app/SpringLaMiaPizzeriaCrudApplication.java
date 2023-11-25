@@ -56,21 +56,52 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 		Ingredient mozzarella = new Ingredient("mozzarella");
 		Ingredient prosciuttoCotto = new Ingredient("prosciutto cotto");
 		Ingredient salamePiccante = new Ingredient("salame piccante");
-		
+		Ingredient funghi = new Ingredient("funghi");
+		Ingredient salsiccia = new Ingredient("salsiccia");
+		Ingredient carciofi = new Ingredient("carciofi");
+		Ingredient olive = new Ingredient("olive");
+		Ingredient pomodorini = new Ingredient("pomodorini");
+		Ingredient gorgonzola = new Ingredient("gorgonzola");
+		Ingredient fontina = new Ingredient("fontina");
+		Ingredient provola = new Ingredient("provola");
+		Ingredient acciughe = new Ingredient("acciughe");
+
 		// * RELAZIONE MANY-TO-MANY / N-N - STEP 3.5/3.5 - INSERIRE DATI NEL DB --> SALVARE gli elementi da inserire nel db
 		ingredientService.save(pomodoro);
 		ingredientService.save(mozzarella);
 		ingredientService.save(prosciuttoCotto);
 		ingredientService.save(salamePiccante);
-
+		ingredientService.save(funghi);
+		ingredientService.save(salsiccia);
+		ingredientService.save(carciofi);
+		ingredientService.save(olive);
+		ingredientService.save(pomodorini);
+		ingredientService.save(gorgonzola);
+		ingredientService.save(fontina);
+		ingredientService.save(provola);
+		ingredientService.save(olive);
+		ingredientService.save(acciughe);
+		
     // * RELAZIONE MANY-TO-MANY / N-N - STEP 4.5/4.5 - COLLEGARE GLI ID DELLE PIZZE CON GLI ID DEGLI INGREDIENTI NELLA TABELLA db_pizzeria_relationships DEL DB --> aggiungere gli ingredienti(ogetti) creati alle pizze(oggetti)
 		Pizza margherita = new Pizza("Margherita", "Pomodoro e mozzarella", "margherita.jpg", 5.00f, pomodoro, mozzarella );
 		Pizza cotto = new Pizza("Prosciutto Cotto", "Pomodoro, mozzarella e prosciutto cotto", "cotto.jpg", 6.50f, pomodoro, mozzarella, prosciuttoCotto);
 		Pizza diavola = new Pizza("Diavola", "Pomodoro, mozzarella e salame piccante", "diavola.jpg", 7.00f, pomodoro, mozzarella, salamePiccante);
-	
+		Pizza funghiPizza = new Pizza("Funghi", "Pomodoro, mozzarella e funghi", "funghi.jpg", 6.00f, pomodoro, mozzarella, funghi);
+		Pizza salsicciaPizza = new Pizza("Salsiccia", "Pomodoro, mozzarella e salsiccia", "salsiccia.jpg", 6.50f, pomodoro, mozzarella, salsiccia);
+		Pizza capricciosa = new Pizza("Capricciosa", "Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi, olive", "capricciosa.jpg", 8.00f, pomodoro, mozzarella, prosciuttoCotto, funghi, carciofi, olive);
+		Pizza quattroStagioni = new Pizza("Quattro Stagioni", "Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi, pomodorini", "quattro-stagioni.jpg", 8.50f, pomodoro, mozzarella, prosciuttoCotto, funghi, carciofi, pomodorini);
+		Pizza quattroFormaggi = new Pizza("Quattro Formaggi", "Pomodoro, mozzarella, gorgonzola, fontina, provola", "quattro-formaggi.jpg", 9.00f, pomodoro, mozzarella, gorgonzola, fontina, provola);
+		Pizza napoli = new Pizza("Napoli", "Pomodoro, mozzarella, acciughe", "napoli.jpg", 7.50f, pomodoro, mozzarella, acciughe);
+		
 		pizzaService.save(margherita);
 		pizzaService.save(cotto);
 		pizzaService.save(diavola);
+		pizzaService.save(funghiPizza);
+		pizzaService.save(salsicciaPizza);
+		pizzaService.save(capricciosa);
+		pizzaService.save(quattroStagioni);
+		pizzaService.save(quattroFormaggi);
+		pizzaService.save(napoli);
 		
 		System.out.println("\n\nDati inseriti nella tabella del database\n\n");
 	
