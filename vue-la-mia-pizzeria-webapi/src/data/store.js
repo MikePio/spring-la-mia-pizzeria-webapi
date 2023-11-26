@@ -14,6 +14,8 @@ export const store = reactive({
   price: '',
   photo: '',
   description: '',
+  // loader
+  loaded: false,
 
 
 

@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios'
 import { store } from '../data/store'
+import Loader from "../components/partials/Loader.vue"
 
 export default {
   name: 'HomeView',
@@ -13,6 +14,7 @@ export default {
   },
 
   components: {
+    Loader,
 
   },
 
@@ -22,9 +24,11 @@ export default {
         .then(response => {
           store.pizzas = response.data; // Memorizza i dati delle pizze nella variabile 'pizzas' del componente
           console.log(store.pizzas);
+          //* per far scomparire il loader
+          store.loaded = true;
         })
         .catch(error => {
-          console.error('Errore nella richiesta delle pizze:', error);
+          console.error('Error in requesting pizzas: ', error);
         });
     },
 
@@ -47,16 +51,18 @@ export default {
     
     <h2 class="mb-5 text-center">Home</h2>
 
-    <h1 class="text-danger text-center" v-if="store.pizzas.length < 1">
+    <Loader v-if="!store.loaded"/>
+
+    <h1 v-if="store.loaded && store.pizzas.length < 1" class="text-danger text-center">
       There aren't pizzas
     </h1>
 
-    <div class="pizza-cards d-flex justify-content-center flex-wrap">
+    <div v-if="store.loaded" class="pizza-cards d-flex justify-content-center flex-wrap">
       <div v-for="pizza in store.pizzas" :key="pizza.id" class="pizza-card me-3 mb-3">
         <div class="pizza-details ps-2 py-2">
           <h4>{{ pizza.name }}</h4>
           <p>{{ pizza.description }}</p>
-          <p>Price: €{{ pizza.price }}</p>
+          <p>Price: € {{ pizza.price }}</p>
         </div>
         <div class="pizza-image d-flex align-items-center justify-content-end ">
           <!-- //* soluzione @error con vue -->

@@ -35,7 +35,7 @@ export default {
         ((dayOfWeek >= 2 || dayOfWeek <= 6 || dayOfWeek === 0) && (hours >= 20 && hours <= 22)) ||
         ((dayOfWeek >= 2 || dayOfWeek <= 6 || dayOfWeek === 0) && ((hours == 19 && minutes >= 30) || (hours == 23 && minutes <= 29))) 
       ) {
-        this.message = `Pizzeria aperta fino alle 23:30`;
+        this.message = `Pizzeria open until 11:30 PM`;
       } else if ( //* "La pizzeria riapre alle 19:30" dal martedì alla domenica, dalle ore 00:00 alle ore 19:29 e dalle 23:31 a 23:59
         // ((dayOfWeek != 1) && (hours >= 0 && hours <= 18)) ||
         // ((dayOfWeek != 1) && (((hours == 19 && minutes <= 29) && (dayOfWeek != 1 && dayOfWeek <= 1)) || ((hours == 23 && minutes >= 30) && (dayOfWeek != 1 && dayOfWeek >= 2 ) ))) 
@@ -43,10 +43,10 @@ export default {
         ((dayOfWeek >= 2 || dayOfWeek <= 6 || dayOfWeek === 0) && (hours >= 0 && hours <= 18)) ||
         ((dayOfWeek >= 2 || dayOfWeek <= 6 || dayOfWeek === 0) && (((hours == 19 && minutes <= 29) && (dayOfWeek != 1 && dayOfWeek <= 1)) || ((hours == 23 && minutes >= 30) && (dayOfWeek != 1 && dayOfWeek >= 2 ) ))) 
       ) {
-        this.message = "La pizzeria riapre alle 19:30";
+        this.message = "Pizzeria reopens at 7:30 PM";
         //! in realtà la soluzione migliore sarebbe impostare per prima la condizione per questo messaggio (ho fatto questa soluzione alternativa solo per esercitarmi con la logica)
       } else { //* "La pizzeria riapre martedì alle 19:30" dalle 23:30 della domenica fino a 19:29 del martedì
-        this.message = "La pizzeria riapre martedì alle 19:30";
+        this.message = "Pizzeria reopens on Tuesday at 7:30 PM";
         // this.message = "Error";
       }
     }
