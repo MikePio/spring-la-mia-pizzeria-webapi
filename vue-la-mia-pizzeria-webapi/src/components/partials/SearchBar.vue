@@ -5,7 +5,8 @@ import { store } from '../../data/store';
 export default {
   name: 'SearchBar',
   data(){
-    return{
+    return{      
+      //* dati già salvati nello store:
       // toSearch: '',
       // searched: false,
       store,
@@ -23,8 +24,7 @@ export default {
       // axios.get(store.apiUrl + '?q=' + store.toSearch) // utilizza i parametri per passare la query di ricerca al backend
         .then(result => {
           store.pizzas = result.data;
-          console.log('search: ');
-          console.log(store.pizzas);
+          console.log('Search: ', store.pizzas);
           store.loaded = true;
           // store.toSearch = ''; //* serve se vuoi cancellare ciò che hai cercato nella barra di ricerca
         })    

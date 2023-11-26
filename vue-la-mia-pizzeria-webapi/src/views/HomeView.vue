@@ -26,8 +26,7 @@ export default {
       axios.get(store.apiUrl)
         .then(response => {
           store.pizzas = response.data; // Memorizza i dati delle pizze nella variabile 'pizzas' del componente
-          console.log('home');
-          console.log(store.pizzas);
+          console.log('Home: ', store.pizzas);
           //* per far scomparire il loader
           store.loaded = true;
         })

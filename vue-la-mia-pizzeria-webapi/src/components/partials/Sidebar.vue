@@ -9,9 +9,10 @@ export default {
   },
 
   data(){
-    return{
-      store,
+    return{      
+      //* dati già salvati nello store:
       // showSidebar: false,
+      store,
 
     }
   },
