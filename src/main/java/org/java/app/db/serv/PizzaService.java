@@ -49,6 +49,12 @@ public class PizzaService {
 		// ! STEP 2 PER CERCARE UN OGGETTO NEL FORM
 		// * trova il nome della pizza con le lettere che sono incluse nel nome della pizza (parola cercata: "vola" trovata la pizza "diavola")
 		return pizzaRepo.findByNameContaining(string);
+		//* oppure si può inserire direttamente qui la logica della funzione che, in questo caso, è stata già inserita nel controller
+		// if (string == null || string.isEmpty()) {
+		// 		return pizzaRepo.findAll();
+		// } else {
+		// 		return pizzaRepo.findByNameContaining(string);
+		// }
 	}
 	
 	// * DELETE - STEP 1 - aggiungere in PizzaService il metodo per l'eliminazione da importare nel controller

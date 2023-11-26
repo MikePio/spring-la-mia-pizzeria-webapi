@@ -34,35 +34,35 @@ public class PizzaApiController {
   @Autowired
   private SpecialOfferService specialOfferService;
   
-  // * soluzione + semplice per ottenere tutte le pizze // es. http://localhost:8080/api/v1.0/pizzeria-italia
-  @GetMapping
-  public ResponseEntity<List<Pizza>> getAllPizzas() {
+  // * soluzione + semplice per ottenere tutte le pizze SENZA LA SEARCH BAR // es. http://localhost:8080/api/v1.0/pizzeria-italia
+  // @GetMapping
+  // public ResponseEntity<List<Pizza>> getAllPizzas() {
 
-    List<Pizza> pizzas = null;
+  //   List<Pizza> pizzas = null;
 
-    pizzas = pizzaService.findAll();
+  //   pizzas = pizzaService.findAll();
 
-    return new ResponseEntity<>(pizzas, HttpStatus.OK);
-  }
+  //   return new ResponseEntity<>(pizzas, HttpStatus.OK);
+  // }
 
   // * spring-la-mia-pizzeria-webapi DAY 1 - STEP 3 - compilare il controller e stampare hello world testare le API con `PostMan` o `Thunder Client` (estensione di Visual Studio Code) es. http://localhost:8080/api/pizza-test in GET
   // * spring-la-mia-pizzeria-webapi DAY 1 - STEP 4.3 - compilare il controller e stampare il json tramite le API con `PostMan` o `Thunder Client` (estensione di Visual Studio Code) es. http://localhost:8080/api/pizza-test in GET
   // * metodo per la ricerca di una pizza per nome esempio da cercare nelle api per mostrare la pizza margherita e ciò a cui è associato: http://localhost:8080/api/v1.0/pizzeria-italia?q=margherita
-  // @GetMapping
-  // public ResponseEntity<List<Pizza>> getAllPizzas(@RequestParam(required = false, name = "q") String query) {
+  @GetMapping
+  public ResponseEntity<List<Pizza>> getAllPizzas(@RequestParam(required = false, name = "q") String query) {
 
-  //   List<Pizza> pizzas = null;
+    List<Pizza> pizzas = null;
 
-  //   if(query == null){
-  //     // * ricerca di tutte le pizze
-  //     pizzas = pizzaService.findAll();
-  //   }else{
-  //     // * ricerca di una pizza per nome
-  //     pizzas = pizzaService.findByName(query); // es. da cercare nelle api per mostrare la pizza margherita e ciò a cui è associato: http://localhost:8080/api/v1.0/pizzeria-italia?q=margherita
-  //   }
+    if(query == null || query.isEmpty()){
+      // * ricerca di tutte le pizze
+      pizzas = pizzaService.findAll();
+    }else{
+      // * ricerca di una pizza per nome
+      pizzas = pizzaService.findByName(query); //* es. da cercare nelle api per mostrare la pizza margherita e ciò a cui è associato: http://localhost:8080/api/v1.0/pizzeria-italia?q=margherita
+    }
 
-  //   return new ResponseEntity<>(pizzas, HttpStatus.OK);
-  // }
+    return new ResponseEntity<>(pizzas, HttpStatus.OK);
+  }
 
   // * metodo per la ricerca di una pizza per id es. da cercare nelle api per mostrare la pizza con id = 2 http://localhost:8080/api/v1.0/pizzeria-italia/2
   @GetMapping("{id}")

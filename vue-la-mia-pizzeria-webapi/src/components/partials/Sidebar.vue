@@ -33,7 +33,7 @@ export default {
 <!-- <div :class="{ 'd-block': store.showSidebar, 'd-none': !store.showSidebar }"> -->
   <div class="d-flex sidebar-custom">
     <div class="d-flex flex-column flex-shrink-0 p-3 text-dark bg-white shadow-top rounded-end" style="width: 280px; height: 100vh;">
-      <router-link :to="{name: 'home'}" class="d-flex align-items-center justify-content-between mb-md-0 me-md-auto link-dark text-decoration-none">
+      <router-link :to="{name: 'home'}" class="d-flex align-items-center justify-content-between mb-md-0 link-dark text-decoration-none">
         <h2 class="my-2">Pizzeria Italia</h2>
         <button class="btn-dark-c" @click.prevent="store.toggleSidebar()"><i class="fa fa-times"></i></button>
       </router-link>

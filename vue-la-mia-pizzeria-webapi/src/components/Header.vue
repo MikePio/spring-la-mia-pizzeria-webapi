@@ -92,7 +92,7 @@ export default {
       </li>
     </ul>
 
-    <div class="d-flex justify-content-between align-items-center text-white me-2">
+    <div class="d-flex justify-content-between align-items-center text-white me-2 me-lg-5">
       <SearchBar/>
     </div>
 
@@ -163,7 +163,7 @@ header{
 }
 
 // da 0px fino a 576px
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 821px) {
     header{
       nav{
         .side-toggle-btn{

@@ -16,7 +16,7 @@ export const store = reactive({
   description: '',
   // loader
   loaded: false,
-
+  searched: false,
 
 
   // methods

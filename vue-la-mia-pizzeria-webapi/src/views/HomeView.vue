@@ -20,10 +20,13 @@ export default {
 
   methods: {
     getPizzas() {
+      store.toSearch = '',      
       store.loaded = false;
+      store.searched = false;
       axios.get(store.apiUrl)
         .then(response => {
           store.pizzas = response.data; // Memorizza i dati delle pizze nella variabile 'pizzas' del componente
+          console.log('home');
           console.log(store.pizzas);
           //* per far scomparire il loader
           store.loaded = true;
@@ -32,12 +35,21 @@ export default {
           console.error('Error in requesting pizzas: ', error);
         });
     },
-
+    formatNumber(number) {
+        if (typeof number === 'number') {
+          return number.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        } else {
+          return number; // gestione di casi non numerici
+        }
+    },
 
   },
 
   mounted() {
-    this.getPizzas();
+    if(store.searched === false){
+
+      this.getPizzas();
+    }
 
   
   }
@@ -59,11 +71,11 @@ export default {
     </h1>
 
     <div v-if="store.loaded" class="pizza-cards d-flex justify-content-center flex-wrap">
-      <div v-for="pizza in store.pizzas" :key="pizza.id" class="pizza-card me-3 mb-3">
+      <div v-for="pizza in store.pizzas" :key="pizza.id" class="pizza-card me-3 mb-3 shadow-sm">
         <div class="pizza-details ps-2 py-2">
           <h4>{{ pizza.name }}</h4>
           <p>{{ pizza.description }}</p>
-          <p>Price: € {{ pizza.price }}</p>
+          <p>Price: € {{ formatNumber(pizza.price) }}</p>
         </div>
         <div class="pizza-image d-flex align-items-center justify-content-end ">
           <!-- //* soluzione @error con vue -->
@@ -82,6 +94,7 @@ export default {
       </div>
     </div>
   
+    <button v-if="store.searched === true" type="submit" @click="getPizzas" :btn-danger="store.loaded" class="btn btn-danger-c d-flex justify-content-center align-items-center mt-4">All pizzas</button>
   </div>
 </template>
 
