@@ -20,6 +20,7 @@ export default {
 
   methods: {
     getPizzas() {
+      store.loaded = false;
       axios.get(store.apiUrl)
         .then(response => {
           store.pizzas = response.data; // Memorizza i dati delle pizze nella variabile 'pizzas' del componente

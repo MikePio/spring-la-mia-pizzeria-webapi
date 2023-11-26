@@ -46,7 +46,7 @@ export default {
 </template>
 
 <style lang='scss'>
-@use './scss/main.scss' as *;
+// @use './scss/main.scss' as *; //! non usare in questo modo scss perché rallenta tutto il sito meglio scriverlo direttamente qui in in basso in App.vue
 body{
   // todo da eliminare provvisorio
   // background-color: #4338CA;  
@@ -54,6 +54,12 @@ body{
   .bg-dark{
     background-color: rgba(255,  0, 30, 1) !important;
   }
+
+}
+
+.btn-danger-c{
+  background-color: #ff001e !important;
+  color: white;
 }
 
 .overflow-y-hidden{

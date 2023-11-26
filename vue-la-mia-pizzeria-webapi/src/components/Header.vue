@@ -1,8 +1,14 @@
 <script>
 import { store } from '../data/store';
+import SearchBar from '../components/partials/SearchBar.vue';
 
 export default {
   name: 'Header',
+
+  components:{
+    SearchBar,
+
+  },
 
   data(){
     return{
@@ -85,6 +91,11 @@ export default {
         <!-- <a href="#">Contacts</a> -->
       </li>
     </ul>
+
+    <div class="d-flex justify-content-between align-items-center text-white me-2">
+      <SearchBar/>
+    </div>
+
     <div class="d-flex justify-content-between align-items-center text-white">
       <div>{{ message }}</div>
     </div>

@@ -86,12 +86,12 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 		Pizza margherita = new Pizza("Margherita", "Pomodoro e mozzarella", "margherita.jpg", 5.00f, pomodoro, mozzarella );
 		Pizza cotto = new Pizza("Prosciutto Cotto", "Pomodoro, mozzarella e prosciutto cotto", "cotto.jpg", 6.50f, pomodoro, mozzarella, prosciuttoCotto);
 		Pizza diavola = new Pizza("Diavola", "Pomodoro, mozzarella e salame piccante", "diavola.jpg", 7.00f, pomodoro, mozzarella, salamePiccante);
-		Pizza funghiPizza = new Pizza("Funghi", "Pomodoro, mozzarella e funghi", "funghi.jpg", 6.00f, pomodoro, mozzarella, funghi);
-		Pizza salsicciaPizza = new Pizza("Salsiccia", "Pomodoro, mozzarella e salsiccia", "salsiccia.jpg", 6.50f, pomodoro, mozzarella, salsiccia);
-		Pizza capricciosa = new Pizza("Capricciosa", "Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi, olive", "capricciosa.jpg", 8.00f, pomodoro, mozzarella, prosciuttoCotto, funghi, carciofi, olive);
-		Pizza quattroStagioni = new Pizza("Quattro Stagioni", "Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi, pomodorini", "quattro-stagioni.jpg", 8.50f, pomodoro, mozzarella, prosciuttoCotto, funghi, carciofi, pomodorini);
+		Pizza funghiPizza = new Pizza("Funghi", "Pomodoro, mozzarella e funghi", "funghi.jfif", 6.00f, pomodoro, mozzarella, funghi);
+		Pizza salsicciaPizza = new Pizza("Salsiccia", "Pomodoro, mozzarella e salsiccia", "salsiccia.jfif", 6.50f, pomodoro, mozzarella, salsiccia);
+		Pizza capricciosa = new Pizza("Capricciosa", "Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi, olive", "capricciosa.jfif", 8.00f, pomodoro, mozzarella, prosciuttoCotto, funghi, carciofi, olive);
+		Pizza quattroStagioni = new Pizza("Quattro Stagioni", "Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi, pomodorini", "quattro-stagioni.webp", 8.50f, pomodoro, mozzarella, prosciuttoCotto, funghi, carciofi, pomodorini);
 		Pizza quattroFormaggi = new Pizza("Quattro Formaggi", "Pomodoro, mozzarella, gorgonzola, fontina, provola", "quattro-formaggi.jpg", 9.00f, pomodoro, mozzarella, gorgonzola, fontina, provola);
-		Pizza napoli = new Pizza("Napoli", "Pomodoro, mozzarella, acciughe", "napoli.jpg", 7.50f, pomodoro, mozzarella, acciughe);
+		Pizza napoli = new Pizza("Napoli", "Pomodoro, mozzarella, acciughe", "napoli.jfif", 7.50f, pomodoro, mozzarella, acciughe);
 		
 		pizzaService.save(margherita);
 		pizzaService.save(cotto);
