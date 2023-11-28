@@ -1,16 +1,22 @@
 package org.java.app.db.api.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.java.app.db.api.dto.PizzaDTO;
+import org.java.app.db.api.response.ErrorResponse;
 import org.java.app.db.pojo.Pizza;
 import org.java.app.db.pojo.SpecialOffer;
 import org.java.app.db.serv.PizzaService;
 import org.java.app.db.serv.SpecialOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.validation.Valid;
 
 // * spring-la-mia-pizzeria-webapi DAY 1 - STEP 2 - creare il controller (PizzaApiController) nel pacchetto delle API (org.java.app.db.api.controller)
 @RestController
@@ -101,14 +109,50 @@ public class PizzaApiController {
   //   "ingredients": null,
   //   "formattedPrice": "10,00"
   // }
-	@PostMapping
-	public ResponseEntity<Pizza> createPizza(@RequestBody PizzaDTO pizzaDto) {
+
+  //* CREATE SENZA la gestione dei messaggi di errore  */
+	// @PostMapping
+	// public ResponseEntity<Pizza> createPizza(@RequestBody PizzaDTO pizzaDto) {
 		
-		Pizza pizza = new Pizza(pizzaDto);
-		pizza = pizzaService.save(pizza);
+  //   Pizza pizza = new Pizza(pizzaDto);
+
+	// 	pizza = pizzaService.save(pizza);
 		
-		return new ResponseEntity<>(pizza, HttpStatus.OK);
-	}
+	// 	return new ResponseEntity<>(pizza, HttpStatus.OK);
+	// }
+  
+  //* CREATE CON la gestione dei messaggi di errore  */
+  @PostMapping                             // @RequestBody indica l'oggetto da inviare in post
+  public ResponseEntity<?> createPizza(@Valid @RequestBody PizzaDTO pizzaDto, BindingResult bindingResult, Model model) {
+    
+    // * verifica se ci sono errori, crea un HashMap e poi inserisce come chiave il campo e come valore il messaggio di errore
+    if (bindingResult.hasErrors()) {
+      Map<String, String> errors = new HashMap<>();
+      bindingResult.getFieldErrors().forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
+      ErrorResponse errorResponse = new ErrorResponse(errors);
+      return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    // * creazione oggetto 
+    Pizza pizza = new Pizza(pizzaDto);
+    
+    //* verifico se il nome è unico e salvo l'oggetto nel db oppure stampo il messaggio di errore
+    try {
+      pizzaService.save(pizza);
+      return new ResponseEntity<>(pizza, HttpStatus.OK);
+
+    } catch (DataIntegrityViolationException e) {
+      // CONSTRAIN VALIDATION (unique) cioè verifica se è univoco
+      System.out.println("Error: " + e.getClass().getSimpleName());
+  
+      Map<String, String> errors = new HashMap<>();
+      errors.put("name", "The name must be unique");
+  
+      ErrorResponse errorResponse = new ErrorResponse(errors);
+      return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+  }
+
 
   // * modifica di una pizza esistente con PUT
   // * su thunder client o postman inserendo l'url http://localhost:8080/api/v1.0/pizzeria-italia/ + l'id della pizza da modificare, scrivendo nel BODY il codice qui in basso e inviandolo in PUT dovrebbe modificare l'oggetto/la pizza selezionato/a

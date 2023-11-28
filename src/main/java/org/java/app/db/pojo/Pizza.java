@@ -39,7 +39,7 @@ public class Pizza {
 
 	private String description;
   
-  @NotBlank(message = "\nEnter the name of the image followed by the format (e.g. name.jpg, name.png...)")
+  @NotBlank(message = "\nThe image field must be required")
 	private String photo;
 
   @Column(nullable = false, unique = false)
