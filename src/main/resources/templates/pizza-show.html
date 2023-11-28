@@ -19,7 +19,8 @@
 		</div>
 
 		<!-- * soluzione 1 per mostrare le immagini-->
-		<img alt="" th:src="@{/img/__${pizza.photo}__}" th:alt="${pizza.photo}" class="img-show-page my-2 rounded">
+		<img th:if="${#strings.startsWith(pizza.photo, 'https://') or #strings.startsWith(pizza.photo, 'http://')}" alt="" th:src="${pizza.photo}" th:alt="${pizza.photo}" class="img-show-page my-2 rounded">
+		<img th:if="${not #strings.startsWith(pizza.photo, 'https://') and not #strings.startsWith(pizza.photo, 'http://')}" alt="" th:src="@{/img/__${pizza.photo}__}" th:alt="${pizza.photo}" class="img-show-page my-2 rounded">
 		<!-- * soluzione 2 per mostrare le immagini-->
 		<!-- <img th:src="@{/img/{photo}(photo=${pizza.photo})}" th:alt="${pizza.photo}" class="my-2 w-50"> -->
 		

@@ -78,7 +78,15 @@ export default {
         </div>
         <div class="pizza-image d-flex align-items-center justify-content-end ">
           <!-- //* soluzione @error con vue -->
+            <!-- v-if="pizza.photo.includes('/img/')" -->
           <img 
+            v-if="pizza.photo.startsWith('https://') || pizza.photo.startsWith('http://')"
+            :src="pizza.photo ? pizza.photo : `src/assets/img/placeholder-img.png`" 
+            :alt="pizza.name"
+            @error="$event.target.src=`src/assets/img/placeholder-img.png`"
+          >
+          <img 
+            v-else
             :src="pizza.photo ? `http://localhost:8080/img/${pizza.photo}` : `src/assets/img/placeholder-img.png`"
             :alt="pizza.name"
             @error="$event.target.src=`src/assets/img/placeholder-img.png`"

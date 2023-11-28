@@ -34,7 +34,9 @@
 								<a th:href="@{/pizzas/{id}(id=*{id})}" class="def-link d-flex align-items-center">
 									<div class="w-100 d-flex justify-content-between align-items-center">
 										<div class="d-flex align-items-center">
-											<img alt="" th:src="@{/img/__${pizza.photo}__}" th:alt="${pizza.photo}"
+											<img th:if="${#strings.startsWith(pizza.photo, 'https://') or #strings.startsWith(pizza.photo, 'http://')}" alt="" th:src="${pizza.photo}" th:alt="${pizza.photo}"
+												class="img-item-index-page rounded-circle me-3 " />
+											<img th:if="${not #strings.startsWith(pizza.photo, 'https://') and not #strings.startsWith(pizza.photo, 'http://')}" alt="" th:src="@{/img/__${pizza.photo}__}" th:alt="${pizza.photo}"
 												class="img-item-index-page rounded-circle me-3 " />
 											<h6 class="m-0">[[*{name}]]</h6>
 										</div>

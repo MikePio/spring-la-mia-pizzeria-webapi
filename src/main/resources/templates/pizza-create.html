@@ -45,7 +45,7 @@
         <div class="mb-3 text-start" style="width: 150vh; max-width: 73vw;">
           <label for="photo" class="form-label">Image</label>
           <!-- Messaggio di errore soluzione 1 per th:class (migliore) -->
-          <input th:class="'form-control ' + (${#fields.hasErrors('photo')} ? 'is-invalid' : '')" type="text" th:field="*{photo}" name="photo" placeholder="Es. img/margherita">
+          <input th:class="'form-control ' + (${#fields.hasErrors('photo')} ? 'is-invalid' : '')" type="text" th:field="*{photo}" name="photo" placeholder="Es. img/margherita or https://www.marcobianchi.blog/wp-content/uploads/2023/01/pizza-2048x1365.jpg">
           <!-- Messaggio di errore soluzione 2 per th:class (peggiore) -->
           <!-- <input th:class="${#fields.hasErrors('photo')} ? 'form-control is-invalid' : 'form-control'" type="text" class="form-control" th:field="*{photo}" name="photo" placeholder="Es. img/margherita"> -->
           <!-- * step 6 - Validazione errori - stampare i messaggi di errore in pagina   -->
