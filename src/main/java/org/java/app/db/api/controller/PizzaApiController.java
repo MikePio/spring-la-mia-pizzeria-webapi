@@ -1,5 +1,6 @@
 package org.java.app.db.api.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -127,8 +129,13 @@ public class PizzaApiController {
     
     // * verifica se ci sono errori, crea un HashMap e poi inserisce come chiave il campo e come valore il messaggio di errore
     if (bindingResult.hasErrors()) {
-      Map<String, String> errors = new HashMap<>();
-      bindingResult.getFieldErrors().forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
+      Map<String, List<String>> errors = new HashMap<>();
+      bindingResult.getFieldErrors().forEach(error -> {
+        String field = error.getField();
+        String message = error.getDefaultMessage();
+        errors.computeIfAbsent(field, key -> new ArrayList<>()).add(message);
+      });
+      
       ErrorResponse errorResponse = new ErrorResponse(errors);
       return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
@@ -145,9 +152,16 @@ public class PizzaApiController {
       // CONSTRAIN VALIDATION (unique) cioè verifica se è univoco
       System.out.println("Error: " + e.getClass().getSimpleName());
   
-      Map<String, String> errors = new HashMap<>();
-      errors.put("name", "The name must be unique");
-  
+      // creazione di una mappa per gli errori
+      Map<String, List<String>> errors = new HashMap<>();
+      // creazione di una lista per gli errori relativi al campo "name"
+      List<String> nameErrors = new ArrayList<>();
+      // aggiunta del messaggio di errore alla lista "nameErrors"
+      nameErrors.add("The name must be unique");
+      // inserimento della lista degli errori relativi al campo "name" nella mappa "errors"
+      errors.put("name", nameErrors);
+      
+      // creazione dell'oggetto ErrorResponse con la mappa degli errori e restituzione come risposta
       ErrorResponse errorResponse = new ErrorResponse(errors);
       return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }

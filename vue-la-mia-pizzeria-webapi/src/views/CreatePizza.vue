@@ -16,6 +16,7 @@ export default {
             sending: false,
             success: false,
             errors: {},
+            errorMessage: false,
 
         }
     },
@@ -29,6 +30,7 @@ export default {
         sendForm() {
             this.sending = true;
             this.errors = {};
+            this.errorMessage = false;
             this.success = false;
 
             const newPizza = {
@@ -41,28 +43,36 @@ export default {
             axios.post(store.apiUrl, newPizza)
                 .then(result => {
                     this.resetForm();    
-                    this.success = result.newPizza.success;
-                    if(!result.newPizza.success){
-                        this.errors = result.newPizza.errors;
-                        console.log("p", this.success, this.errors);
+                    this.success = result.status == 200;
+                    console.log('result.status', result.status);
+                    // ulteriore controllo per gli errori
+                    if(!this.success){
+                        this.errorMessage = true;
+                        this.errors = result.data.errors;
+                        console.log("prova 1", this.success, this.errors);
                     }else{
                         this.errors = {};
+                        this.errorMessage = false;
+                        console.log("prova 2", this.success, this.errors);
                     }
                     this.sending = false;
                     console.log('Pizza created: ', result); 
-                    console.log("pp", this.success, this.errors);
+                    console.log("prova 3", this.success, this.errors);
                 })
                 .catch(error => {
                     this.sending = false;
-                    console.log("d", this.success, this.errors);
+                    this.errorMessage = true;
+                    console.log("error ", this.success, this.errors);
                     if (error.response && error.response.data && error.response.data.errors) {
                         // se ci sono errori nella risposta, assegna gli errori alla variabile errors
                         this.errors = error.response.data.errors;
-                        console.log("dd", this.success, this.errors);
-
+                        console.log("error 1", this.success, this.errors);
+                        // this.errorMessage = true;
                     } else {
-                        console.log("ddd", this.success, this.errors);
-                        console.error('Error creating pizza: ', error);
+                        console.log("error 2", this.success, this.errors);
+                        // console.error('Error creating pizza: ', this.errors);
+                        console.log(error);
+                        // this.errorMessage = true;
                     }
                 });
         },
@@ -71,7 +81,7 @@ export default {
             store.price = '';
             store.photo = '';
             store.description = '';
-            this.success = true;
+            this.errorMessage = false;
         },
             
 
@@ -90,8 +100,10 @@ export default {
             <h5 class="text-success p-0 m-0">Pizza Added! Check the menu</h5>
         </div>
 
-        <div v-if="errors" class="alert alert-danger p-0 mt-4" role="alert">
-            <div v-for="(error,index) in errors" :key="index" class="text-danger mx-4 my-2">- {{ error }}</div> 
+        <div v-if="errorMessage === true" class="alert alert-danger p-0 mt-4" role="alert">
+            <h4 class="text-danger text-center mt-2">Error</h4>
+            <div class="text-danger text-center my-2 mx-4"><strong>Some values entered in the form are incorrect</strong></div>
+            <div v-for="(error,index) in errors" :key="index" class="text-danger mx-4 my-2">- {{ error[0] }}</div> 
         </div>
 
         <div class="d-flex flex-column align-items-center justify-content-center">
@@ -100,22 +112,31 @@ export default {
                 <div class="mb-3" style="width: 80vw">
                     <label for="name" class="fw-bold form-label">Name</label>
                     <input :class="{ 'is-invalid' : errors.name }" v-model.trim="store.name" type="text" name="name" class="form-control" placeholder="Margherita"> 
-                    <div class="text-danger mt-1">{{errors.name}}</div>
+                    <!-- //* CONTROLLO LATO FRONTEND (viene effettuato prima di un controllo tramite backend) - minlength potrebbe non funzionare come previsto con v-model quindi bisogna fare una funzione apposita in js -->
+                    <!-- //! DA DECOMMENTARE (LASCIATO COMMENTATO PER FAR VEDERE CHE FUNZIONA IL CONTROLLO DEGLI ERRORI LATO BACKEND)  -->
+                    <!-- <input :class="{ 'is-invalid' : errors.name }" v-model.trim="store.name" required minlength="2" type="text" name="name" class="form-control" placeholder="Margherita">  -->
+                    <div v-for="(error,index) in errors.name" :key="index" class="text-danger mt-1">{{ error }}</div>
                 </div>
                 <div class="mb-3" style="width: 80vw">
                     <label for="price" class="fw-bold form-label">Price</label>
-                    <input :class="{ 'is-invalid' : errors.price }" v-model.trim="store.price" type="text" class="form-control" name="price" placeholder="10.50"> 
-                    <div class="text-danger mt-1">{{errors.price}}</div>
+                    <input :class="{ 'is-invalid' : errors.price }" v-model.trim="store.price" pattern="[0-9.]*" type="number" step="0.10" min="1" class="form-control" name="price" placeholder="10.50"> 
+                    <!-- //* CONTROLLO LATO FRONTEND (viene effettuato prima di un controllo tramite backend) - minlength potrebbe non funzionare come previsto con v-model quindi bisogna fare una funzione apposita in js -->
+                    <!-- //! DA DECOMMENTARE (LASCIATO COMMENTATO PER FAR VEDERE CHE FUNZIONA IL CONTROLLO DEGLI ERRORI LATO BACKEND)  -->
+                    <!-- <input :class="{ 'is-invalid' : errors.price }" v-model.trim="store.price" required minlength="1" pattern="[0-9.]*" type="number" step="0.10" min="1" class="form-control" name="price" placeholder="10.50">  -->
+                    <div v-for="(error,index) in errors.price" :key="index" class="text-danger mt-1">{{ error }}</div>
                 </div>
                 <div class="mb-3" style="width: 80vw">
                     <label for="photo" class="fw-bold form-label">Image</label>
                     <input :class="{ 'is-invalid' : errors.photo }" v-model.trim="store.photo" type="text" class="form-control" name="photo" placeholder="https://www.marcobianchi.blog/wp-content/uploads/2023/01/pizza-2048x1365.jpg"> 
-                    <div class="text-danger mt-1">{{errors.photo}}</div>
+                    <!-- //* CONTROLLO LATO FRONTEND (viene effettuato prima di un controllo tramite backend) - minlength potrebbe non funzionare come previsto con v-model quindi bisogna fare una funzione apposita in js -->
+                    <!-- //! DA DECOMMENTARE (LASCIATO COMMENTATO PER FAR VEDERE CHE FUNZIONA IL CONTROLLO DEGLI ERRORI LATO BACKEND)  -->
+                    <!-- <input :class="{ 'is-invalid' : errors.photo }" v-model.trim="store.photo" required minlength="1" type="text" class="form-control" name="photo" placeholder="https://www.marcobianchi.blog/wp-content/uploads/2023/01/pizza-2048x1365.jpg">  -->
+                    <div v-for="(error,index) in errors.photo" :key="index" class="text-danger mt-1">{{ error }}</div>
                 </div>
                 <div class="mb-3" style="width: 80vw">
                     <label for="description" class="fw-bold form-label">Description</label>
                     <textarea :class="{ 'is-invalid' : errors.description }" v-model.trim="store.description" type="text" name="description" class="form-control" placeholder="Description" cols="10" rows="10"></textarea> 
-                    <div class="text-danger mt-1">{{errors.description}}</div>
+                    <div v-for="(error,index) in errors.description" :key="index" class="text-danger mt-1">{{ error }}</div>
                 </div>
                 <button type="submit" class="btn btn-danger-c" :btn-danger="sending" :disabled="sending">{{ sending ? 'Loading...' : 'Add' }}</button>
             </form>
