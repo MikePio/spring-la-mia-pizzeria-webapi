@@ -169,8 +169,8 @@ public class PizzaApiController {
 
 
   // * modifica di una pizza esistente con PUT
-  // * su thunder client o postman inserendo l'url http://localhost:8080/api/v1.0/pizzeria-italia/ + l'id della pizza da modificare, scrivendo nel BODY il codice qui in basso e inviandolo in PUT dovrebbe modificare l'oggetto/la pizza selezionato/a
-  // * (es. url per la modifica della pizza con id 2:  http://localhost:8080/api/v1.0/pizzeria-italia/2)
+  // * su thunder client o postman inserendo l'url http://localhost:8080/api/v1.0/pizzeria-italia/ + edit/ + l'id della pizza da modificare, scrivendo nel BODY il codice qui in basso e inviandolo in PUT dovrebbe modificare l'oggetto/la pizza selezionato/a
+  // * (es. url per la modifica della pizza con id 2:  http://localhost:8080/api/v1.0/pizzeria-italia/edit/2)
   // * es. codice da inserire nel Body di thunder client o postman
   // {
   //   "name": "test pizza creata",
@@ -216,7 +216,7 @@ public class PizzaApiController {
   //   ],
   //   "formattedPrice": "10,00"
   // }
-  @PutMapping("{id}")
+  @PutMapping("/edit/{id}")
 	public ResponseEntity<Pizza> updatePizza(@PathVariable int id, @RequestBody PizzaDTO pizzaDto) {
 		
 		Optional<Pizza> optPizza = pizzaService.findById(id);
@@ -233,9 +233,9 @@ public class PizzaApiController {
 	}
 
   // * cancellazione di una pizza esistente 
-  // * su thunder client o postman inserendo l'url http://localhost:8080/api/v1.0/pizzeria-italia/ + l'id della pizza da ELIMINARE e inviandolo in DELETE dovrebbe ELIMINARE l'oggetto/la pizza selezionato/a
-  // * (es. url per l'eliminazione della pizza con id 2:  http://localhost:8080/api/v1.0/pizzeria-italia/2)
-  @DeleteMapping("{id}")
+  // * su thunder client o postman inserendo l'url http://localhost:8080/api/v1.0/pizzeria-italia/ + delete/ + l'id della pizza da ELIMINARE e inviandolo in DELETE dovrebbe ELIMINARE l'oggetto/la pizza selezionato/a
+  // * (es. url per l'eliminazione della pizza con id 2:  http://localhost:8080/api/v1.0/pizzeria-italia/delete/2)
+  @DeleteMapping("/delete/{id}")
 	public ResponseEntity<Boolean> deletePizza(@PathVariable int id) {
 		
 		Optional<Pizza> optPizza = pizzaService.findById(id);

@@ -62,6 +62,18 @@ body{
   color: white;
 }
 
+.btn-warning-c{
+  background-color: #FFC107 !important;
+  color: white;
+}
+
+.def-link{
+  text-decoration: none;
+  // color: inherit;
+  cursor: pointer;
+}
+
+
 .overflow-y-hidden{
   overflow-y: hidden;
   // height: 100vh;

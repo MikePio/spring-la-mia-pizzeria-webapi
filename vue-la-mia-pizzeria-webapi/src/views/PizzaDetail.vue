@@ -28,7 +28,7 @@ export default {
         })
         .catch(error => {
           console.error('Error fetching pizza details:', error);
-          this.loaded = true; // Set loaded to true even in case of an error to avoid infinite loader
+          this.loaded = true;
         });
     },
   },
@@ -40,7 +40,12 @@ export default {
 
 <template>
   <div class="container-inner mx-auto">
-    <h2 v-if="loaded && pizza" class="text-center mb-5">{{ pizza.name }}</h2>
+    <div v-if="loaded && pizza" class="d-flex align-items-center justify-content-center mb-5">
+      <h2 class="text-center me-2">{{ pizza.name }}</h2>
+      <router-link class="def-link" :to="{ name: 'edit', params:{ id: pizza.id } }">
+        <button style="min-height: 40px;" class="btn-icon btn btn-warning-c fw-custom d-flex align-items-center justify-content-center me-1" title="Edit offer"><i class="fa-solid fa-pencil"></i></button>
+      </router-link>
+    </div>
     <img 
       v-if="pizza && (pizza.photo.startsWith('https://') || pizza.photo.startsWith('http://'))"
       :src="pizza.photo ? pizza.photo : `src/assets/img/placeholder-img.png`" 

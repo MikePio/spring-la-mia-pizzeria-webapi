@@ -25,8 +25,7 @@ const router = createRouter({
       component: CreatePizza
     },
     {
-      path: '/edit',
-      // path: '/edit/:id',
+      path: '/edit/:id',
       name: 'edit',
       component: EditPizza
     },
