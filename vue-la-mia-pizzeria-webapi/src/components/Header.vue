@@ -162,7 +162,7 @@ header{
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 
-// da 0px fino a 576px
+// da 0px fino a 821px
 @media screen and (max-width: 821px) {
     header{
       nav{
@@ -177,4 +177,12 @@ header{
 
 }
 
+// da 0px fino a 336px
+@media screen and (max-width: 336px) {
+    header{
+      .text-white{
+        font-size: 0.9rem;
+      }
+    }
+}
 </style>
