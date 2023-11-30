@@ -112,6 +112,8 @@ export default {
                 <router-link class="def-link" :to="{ name: 'pizzaDetail', params:{ id: pizza.id } }">
                     <button style="min-height: 40px;" class="btn-icon btn btn-warning-c fw-custom d-flex align-items-center justify-content-center me-1" title="Edit offer"><i class="fa-solid fa-eye"></i></button>
                 </router-link>
+                <!-- funzione per eliminare una pizza //* DALLO STORE -->
+                <button @click="store.deletePizza(pizza.id, this.$router.push('/'))" style="min-height: 40px" class="btn-icon btn btn-danger-c fw-custom d-flex align-items-center justify-content-center " title="Delete pizza"><i class="fa-solid fa-trash"></i></button>
             </div>
 
             <div v-if="success" class="alert alert-success mt-4" role="alert">

@@ -18,7 +18,7 @@ export default {
   methods: {
     getApi() {
       this.loaded = false;
-      //*rotta definita in PIzzaApiController del progetto Spring
+      //*rotta definita in PizzaApiController del progetto Spring
       // axios.get(store.apiUrl + "/" + this.$route.params.id)
       // oppure
       axios.get(`${store.apiUrl}/${this.$route.params.id}`)
@@ -31,6 +31,24 @@ export default {
           this.loaded = true;
         });
     },
+    // funzione per eliminare una pizza
+    deletePizza() {
+      this.loaded = false;
+      //*rotta definita in PizzaApiController del progetto Spring
+      axios.delete(`${store.apiUrl}/delete/${this.$route.params.id}`)
+        .then(response => {
+          console.log('Successfully deleted pizza:', response.data);
+          // reindirizzo alla pagina home dove ci sono tutte le pizze
+          this.$router.push('/'); //* this.$router è un'istanza fornita da Vue Router (Vue Router gestisce la navigazione all'interno di un'applicazione Vue) 
+        })
+        .catch(error => {
+          console.error('Error while deleting the pizza:', error);
+        })
+        .finally(() => {
+          // codice che deve essere eseguito indipendentemente dal successo o dall'errore della richiesta
+          this.loaded = true;
+        });
+    }
   },
   mounted() {
     this.getApi();
@@ -45,6 +63,8 @@ export default {
       <router-link class="def-link" :to="{ name: 'edit', params:{ id: pizza.id } }">
         <button style="min-height: 40px;" class="btn-icon btn btn-warning-c fw-custom d-flex align-items-center justify-content-center me-1" title="Edit offer"><i class="fa-solid fa-pencil"></i></button>
       </router-link>
+      <!-- funzione per eliminare una pizza //* salvato in pagina (quella salvata nello store viene utilizzata in EditPizza) -->
+      <button @click="deletePizza" style="min-height: 40px" class="btn-icon btn btn-danger-c fw-custom d-flex align-items-center justify-content-center " title="Delete pizza"><i class="fa-solid fa-trash"></i></button>
     </div>
     <img 
       v-if="pizza && (pizza.photo.startsWith('https://') || pizza.photo.startsWith('http://'))"
