@@ -25,8 +25,8 @@ public class AuthConf {
   
     // * STEP 6.8 - AUTHENTICATION - aggiunte le rotte di accesso nel file di configurazione AuthConf 
 			http.csrf().disable().authorizeHttpRequests()
-      // per fare i test senza aver impostato le rotte
-      // .requestMatchers("/**").permitAll()
+      //* per fare le prove o modifiche senza aver impostato le rotte 
+      // .requestMatchers("/**").permitAll() //! QUANDO C'è BISOGNO DI FARE UNA QUALSIASI MODIFICA DECOMMENTARE QUESTA RIGA (OPPURE NON SI PUò ACCEDERE NEMMENOALLA PAGINA CON I MESSAGGI DI ERRORE)
       // ! questa rotta è necessaria oppure le immagini, lo style, bootstrap, fontawesome ed altro potrebbero non funzionare 
       .requestMatchers("/css/**", "/js/**", "/img/**", "/webjars/**", "/font-awesome/**").permitAll()
           // * .permitAll() fa accedere tutti: USER, ADMIN o anche un utente che non ha fatto il login

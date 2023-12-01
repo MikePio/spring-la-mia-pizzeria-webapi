@@ -69,10 +69,16 @@
         <div class="mb-3 text-start">
           <span class="text-white">Ingredients</span>
           <div class="mt-2"></div>
-          <div th:each="ingredient : ${ingredients}" th:object="${ingredient}">
-            <input type="checkbox" th:id="${'ingredient-' + ingredient.id}" th:value="*{id}" th:field="${pizza.ingredients}" placeholder="Ingredient">
-            <label th:for="${'ingredient-' + ingredient.id}" class="form-label">[[*{nameWithInitialCapital}]]</label>
+          <div class="d-flex flex-wrap" style="width: 150vh; max-width: 73vw;">
+            <div th:each="ingredient : ${ingredients}" th:object="${ingredient}">
+              <input type="checkbox" th:id="${'ingredient-' + ingredient.id}" th:value="*{id}" th:field="${pizza.ingredients}" placeholder="Ingredient">
+              <label th:for="${'ingredient-' + ingredient.id}" class="form-label me-3">[[*{nameWithInitialCapital}]]</label>
+            </div>
           </div>
+        </div>
+        <!-- nel caso non ci fossero gli ingredienti -->
+        <div th:unless="${ingredients && ingredients.length > 0}">
+          <span>No ingredients available</span>
         </div>
 
         <!-- * tutti gli errori -->

@@ -131,6 +131,11 @@ public class PizzaController {
 
     // Validazione e stampa errori per il create
     if(bindingResult.hasErrors()){
+
+      //* necessario per mostrare le checkbox anche dopo che c'è un errore nel form */
+      List<Ingredient> ingredients = ingredientService.findAll();
+      model.addAttribute("ingredients", ingredients);
+
       System.out.println("Error: ");
       bindingResult.getAllErrors().forEach(System.out::println);
 
@@ -177,6 +182,11 @@ public class PizzaController {
 
     // Validazione e stampa errori per l'edit
     if(bindingResult.hasErrors()){
+      
+      //* necessario per mostrare le checkbox anche dopo che c'è un errore nel form */
+      List<Ingredient> ingredients = ingredientService.findAll();
+
+      model.addAttribute("ingredients", ingredients);
       System.out.println("Error: ");
       bindingResult.getAllErrors().forEach(System.out::println);
 
