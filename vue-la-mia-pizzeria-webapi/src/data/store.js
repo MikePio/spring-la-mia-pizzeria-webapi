@@ -17,6 +17,7 @@ export const store = reactive({
   // loader
   loaded: false,
   searched: false,
+  deleteMessage: false,
 
 
   // methods
@@ -25,14 +26,16 @@ export const store = reactive({
     // console.log(store.showSidebar);
   },
   // funzione per eliminare una pizza
-  deletePizza(id, router) {
+  deletePizza(id, redirect) {
     store.loaded = false;
     //*rotta definita in PizzaApiController del progetto Spring
     axios.delete(store.apiUrl+ "/delete/" + id)
       .then(response => {
         console.log('Successfully deleted pizza:', response.data);
         // reindirizzo alla pagina home dove ci sono tutte le pizze
-        router; //* this.$router è un'istanza fornita da Vue Router (Vue Router gestisce la navigazione all'interno di un'applicazione Vue) 
+        redirect; //* this.$router è un'istanza fornita da Vue Router (Vue Router gestisce la navigazione all'interno di un'applicazione Vue) 
+        
+        store.setMessageAndReset();
       })
       .catch(error => {
         console.error('Error while deleting the pizza:', error);
@@ -41,5 +44,12 @@ export const store = reactive({
         // codice che deve essere eseguito indipendentemente dal successo o dall'errore della richiesta
         store.loaded = true;
       });
+  },
+  setMessageAndReset() {
+    store.deleteMessage = true;
+
+    setTimeout(() => {
+      store.deleteMessage = false;
+    }, 4000); // 4 secondi
   }
 })

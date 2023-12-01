@@ -32,9 +32,9 @@ export default {
         getOldPizza() {
             this.loaded = false;
             //*rotta definita in PIzzaApiController del progetto Spring
-            // axios.get(store.apiUrl + "/" + this.$route.params.id)
+            // axios.get(store.apiUrl + "/pizzas/" + this.$route.params.id)
             // oppure
-            axios.get(`${store.apiUrl}/${this.$route.params.id}`)
+            axios.get(`${store.apiUrl}/pizzas/${this.$route.params.id}`)
                 .then(result => {
                 this.pizza = result.data;
                 this.loaded = true;

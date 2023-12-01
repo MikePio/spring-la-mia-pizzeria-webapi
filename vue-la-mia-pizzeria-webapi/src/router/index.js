@@ -35,7 +35,7 @@ const router = createRouter({
       component: Contacts
     },
     {
-      path: '/:id',
+      path: '/pizzas/:id',
       name: 'pizzaDetail',
       component: PizzaDetail
     },

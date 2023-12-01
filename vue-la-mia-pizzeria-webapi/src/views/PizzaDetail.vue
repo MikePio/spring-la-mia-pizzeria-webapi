@@ -19,9 +19,9 @@ export default {
     getApi() {
       this.loaded = false;
       //*rotta definita in PizzaApiController del progetto Spring
-      // axios.get(store.apiUrl + "/" + this.$route.params.id)
+      // axios.get(store.apiUrl + "/pizzas/" + this.$route.params.id)
       // oppure
-      axios.get(`${store.apiUrl}/${this.$route.params.id}`)
+      axios.get(`${store.apiUrl}/pizzas/${this.$route.params.id}`)
         .then(result => {
           this.pizza = result.data;
           this.loaded = true;
@@ -40,6 +40,8 @@ export default {
           console.log('Successfully deleted pizza:', response.data);
           // reindirizzo alla pagina home dove ci sono tutte le pizze
           this.$router.push('/'); //* this.$router è un'istanza fornita da Vue Router (Vue Router gestisce la navigazione all'interno di un'applicazione Vue) 
+        
+          store.setMessageAndReset();
         })
         .catch(error => {
           console.error('Error while deleting the pizza:', error);

@@ -75,7 +75,7 @@ public class PizzaApiController {
   }
 
   // * metodo per la ricerca di una pizza per id es. da cercare nelle api per mostrare la pizza con id = 2 http://localhost:8080/api/v1.0/pizzeria-italia/2
-  @GetMapping("{id}")
+  @GetMapping("/pizzas/{id}")
   public ResponseEntity<Pizza> getPizzaById(@PathVariable int id) {
   
     // * Step 1 - Trova la pizza con l'ID specificato

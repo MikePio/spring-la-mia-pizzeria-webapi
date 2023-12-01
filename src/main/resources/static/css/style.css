@@ -25,9 +25,9 @@ header .nav-index a, .def-link {
 
 /* navbar */
 .nav-index {
-  /* altezza da impostare SENZA la sezione del login-logut */
+  /* altezza da impostare SENZA la sezione del login-logout */
   /* height: 80px; */
-  /* margine da impostare CON la sezione del login-logut */
+  /* margine da impostare CON la sezione del login-logout */
   margin-bottom: 10px;
 }
 

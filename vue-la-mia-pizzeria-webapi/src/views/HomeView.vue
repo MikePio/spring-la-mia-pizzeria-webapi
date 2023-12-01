@@ -64,6 +64,10 @@ export default {
     <h2 class="mb-5 text-center">Home</h2>
 
     <Loader v-if="!store.loaded"/>
+  
+    <div v-if="store.loaded && store.deleteMessage" class="alert alert-success mb-5" role="alert">
+      <h5 class="text-success p-0 m-0">Pizza Deleted!</h5>
+    </div>
 
     <h1 v-if="store.loaded && store.pizzas.length < 1" class="text-danger text-center">
       There aren't pizzas
