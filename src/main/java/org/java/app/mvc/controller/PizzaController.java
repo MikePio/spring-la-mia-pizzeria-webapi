@@ -99,7 +99,7 @@ public class PizzaController {
   public String getShow(@PathVariable int id, Model model) {
 
     // Pizza pizza = pizzaService.findById(id);
-    // modificato metodo findById per la ricerca per id utlizzata nella chiamata API
+    // modificato metodo findById per la ricerca per id utilizzata nella chiamata API
     Pizza pizza = pizzaService.findById(id).get();
     model.addAttribute("pizza", pizza);
 
@@ -119,7 +119,13 @@ public class PizzaController {
     List<Ingredient> ingredients = ingredientService.findAll();
 
     model.addAttribute("pizza", new Pizza());
-    model.addAttribute("ingredients", ingredients);
+    if (ingredients.isEmpty()) {
+      // Se non ci sono ingredienti disponibili, fornisci un'opzione predefinita
+      // Oppure puoi anche fornire un messaggio nel modello per indicare l'assenza di ingredienti
+      model.addAttribute("noIngredients", true);
+    } else {
+      model.addAttribute("ingredients", ingredients);
+    }
 
     return "pizza-create";
   }
@@ -134,7 +140,14 @@ public class PizzaController {
 
       //* necessario per mostrare le checkbox anche dopo che c'è un errore nel form */
       List<Ingredient> ingredients = ingredientService.findAll();
-      model.addAttribute("ingredients", ingredients);
+
+      if (ingredients.isEmpty()) {
+        // Se non ci sono ingredienti disponibili, fornisci un'opzione predefinita
+        // Oppure puoi anche fornire un messaggio nel modello per indicare l'assenza di ingredienti
+        model.addAttribute("noIngredients", true);
+      } else {
+        model.addAttribute("ingredients", ingredients);
+      }
 
       System.out.println("Error: ");
       bindingResult.getAllErrors().forEach(System.out::println);
@@ -170,7 +183,13 @@ public class PizzaController {
     List<Ingredient> ingredients = ingredientService.findAll();
 
 		model.addAttribute("pizza", pizza);
-    model.addAttribute("ingredients", ingredients);
+    if (ingredients.isEmpty()) {
+      // Se non ci sono ingredienti disponibili, fornisci un'opzione predefinita
+      // Oppure puoi anche fornire un messaggio nel modello per indicare l'assenza di ingredienti
+      model.addAttribute("noIngredients", true);
+    } else {
+      model.addAttribute("ingredients", ingredients);
+    }
     
     return "pizza-update";
   }
@@ -182,11 +201,18 @@ public class PizzaController {
 
     // Validazione e stampa errori per l'edit
     if(bindingResult.hasErrors()){
-      
+
       //* necessario per mostrare le checkbox anche dopo che c'è un errore nel form */
       List<Ingredient> ingredients = ingredientService.findAll();
 
-      model.addAttribute("ingredients", ingredients);
+      if (ingredients.isEmpty()) {
+        // Se non ci sono ingredienti disponibili, fornisci un'opzione predefinita
+        // Oppure puoi anche fornire un messaggio nel modello per indicare l'assenza di ingredienti
+        model.addAttribute("noIngredients", true);
+      } else {
+        model.addAttribute("ingredients", ingredients);
+      }
+
       System.out.println("Error: ");
       bindingResult.getAllErrors().forEach(System.out::println);
 
