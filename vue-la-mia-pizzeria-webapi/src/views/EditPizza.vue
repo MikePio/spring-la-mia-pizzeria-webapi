@@ -139,7 +139,7 @@ export default {
                     </div>
                     <div class="mb-3" style="width: 80vw">
                         <label for="price" class="fw-bold form-label">Price</label>
-                        <input :class="{ 'is-invalid' : errors.price }" v-model.trim="pizza.price" pattern="[0-9.]*" type="number" step="0.10" min="1" class="form-control" name="price" placeholder="10.50"> 
+                        <input :class="{ 'is-invalid' : errors.price }" v-model.trim="pizza.price" pattern="[0-9.]*" type="number" step="0.01" min="1" class="form-control" name="price" placeholder="10.50"> 
                         <!-- //* CONTROLLO LATO FRONTEND (viene effettuato prima di un controllo tramite backend) - minlength potrebbe non funzionare come previsto con v-model quindi bisogna fare una funzione apposita in js -->
                         <!-- //! DA DECOMMENTARE (LASCIATO COMMENTATO PER FAR VEDERE CHE FUNZIONA IL CONTROLLO DEGLI ERRORI LATO BACKEND)  -->
                         <!-- <input :class="{ 'is-invalid' : errors.price }" v-model.trim="pizza.price" required minlength="1" pattern="[0-9.]*" type="number" step="0.10" min="1" class="form-control" name="price" placeholder="10.50">  -->
@@ -158,7 +158,7 @@ export default {
                         <textarea :class="{ 'is-invalid' : errors.description }" v-model.trim="pizza.description" type="text" name="description" class="form-control" placeholder="Description" cols="10" rows="10"></textarea> 
                         <div v-for="(error,index) in errors.description" :key="index" class="text-danger mt-1">{{ error }}</div>
                     </div>
-                    <button type="submit" class="btn btn-danger-c" :btn-danger="sending" :disabled="sending">{{ sending ? 'Loading...' : 'Add' }}</button>
+                    <button type="submit" class="btn btn-danger-c" :btn-danger="sending" :disabled="sending">{{ sending ? 'Loading...' : 'Edit' }}</button>
                 </form>
             </div>
         </div>
